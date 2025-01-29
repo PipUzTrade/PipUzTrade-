@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PipUzTrade Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --gold: #FFD700;
+            --space: linear-gradient(45deg, #0F0F1A 0%, #1A1A2E 50%, #2A2A40 100%);
+        }
+
+        body {
+            background: var(--space);
+            color: white;
+            line-height: 1.7;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .hero-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: var(--space);
+            animation: gradientFlow 20s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: particleAnim 3s infinite;
+        }
+
+        @keyframes particleAnim {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            padding: 10rem 2rem 8rem;
+            position: relative;
+            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            background: linear-gradient(45deg, var(--gold) 30%, #ffffff 70%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            opacity: 0;
+            animation: logoReveal 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes logoReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin: 6rem 0;
+            opacity: 0;
+            animation: contentReveal 1s 0.3s forwards;
+        }
+
+        @keyframes contentReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 3rem;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transform-style: preserve-3d;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 215, 0, 0.1),
+                transparent
+            );
+            transition: 0.8s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .service-card p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+
+        .social-links {
+            text-align: center;
+            margin-top: 8rem;
+            opacity: 0;
+            animation: fadeInUp 1s 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            margin: 1.5rem;
+            padding: 1.2rem 3rem;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            color: var(--gold);
+        }
+
+        .social-button:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .social-button i {
+            margin-right: 12px;
+            font-size: 1.4rem;
+            transition: transform 0.3s;
+        }
+
+        .social-button:hover i {
+            transform: scale(1.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-top: 8rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 6rem 1.5rem; }
+            .logo { font-size: 3rem; }
+            .service-card { padding: 2rem; }
+            .social-button { padding: 1rem 2rem; margin: 1rem; }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'particles';
+            document.body.appendChild(particlesContainer);
+
+            for(let i = 0; i < 150; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    width: ${Math.random() * 3 + 1}px;
+                    height: ${Math.random() * 3 + 1}px;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 3}s;
+                `;
+                particlesContainer.appendChild(particle);
+            }
+
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                
+                document.querySelectorAll('.service-card').forEach(card => {
+                    card.style.transform = `
+                        translateY(-15px)
+                        scale(1.02)
+                        rotateX(${y}deg)
+                        rotateY(${x}deg)
+                    `;
+                });
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="hero-bg"></div>
+    
+    <header class="header">
+        <div class="logo">PipUzTrade</div>
+        <p>Инвестиции нового поколения</p>
+    </header>
+
+    <div class="container">
+        <div class="services">
+            <div class="service-card">
+                <h3>Форекс Платформа</h3>
+                <p>Алгоритмическая торговля с AI-ассистентом и аналитикой в реальном времени</p>
+            </div>
+            <div class="service-card">
+                <h3>Крипто Решения</h3>
+                <p>Стейкинг, NFT-маркетплейс и безопасный мультичейн-кошелёк</p>
+            </div>
+            <div class="service-card">
+                <h3>Обучение PRO</h3>
+                <p>Персональные менторы и VR-тренажёры для профессиональных трейдеров</p>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a href="https://t.me/+4CcMA5Q0ItE5ODQy" class="social-button" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+            <a href="https://www.instagram.com/pipuz.trade?igsh=MTZ5Nm45Zzg1NDM4cQ%3D%3D&utm_source=qr" class="social-button" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 PipUzTrade Pro. Все права защищены</p>
+    </footer>
+</body>
+</html>
