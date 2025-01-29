@@ -1,31 +1,29 @@
 # PipUzTrade Pro
 
-![PipUzTrade Banner](https://via.placeholder.com/1200x400.png?text=PipUzTrade+Pro+-+Professional+Trading+Solutions)
+![PipUzTrade Banner](https://via.placeholder.com/1200x400.png?text=PipUzTrade+Pro+-+Professional+Forex+%26+Crypto+Solutions)
 
-**Инвестиционная платформа нового поколения**
+**Инновационная платформа для профессионального трейдинга**
 
-## О проекте
+## ✨ Особенности
+- AI-аналитика рынка в реальном времени
+- Мультиплатформенная торговля
+- Индивидуальное обучение с менторами
+- Крипто-стейкинг с высокой APR
 
-PipUzTrade Pro - инновационная платформа для трейдинга и инвестиций, предлагающая:
-- Алгоритмическую торговлю на Forex
-- Криптовалютные решения
-- Профессиональное обучение с VR-технологиями
+## 🛠 Технологии
+- Modern HTML5/CSS3
+- Particle.js анимации
+- 3D Transform эффекты
+- Адаптивный веб-дизайн
 
-## Основные технологии
-- HTML5/CSS3
-- JavaScript (ES6+)
-- CSS Animations
-- Particle.js эффекты
+## 📞 Контакты
+**Основатель и главный разработчик:**  
+**Асадуллохон Махмудов**  
 
-## Разработчик
+[![Telegram Contact](https://img.shields.io/badge/%F0%9F%94%8E-Telegram-%232CA5E0?style=for-the-badge&logo=telegram)](https://t.me/AsadulloxonFX)  
+[![Инстаграм](https://img.shields.io/badge/%F0%9F%93%B3-Instagram-%23E4405F?style=for-the-badge&logo=instagram)](https://www.instagram.com/pipuz.trade)
 
-Проект разработан и поддерживается:
-
-**Asadulloxon Mahmudov**  
-[![Telegram](https://img.shields.io/badge/-Telegram-0088cc?style=flat&logo=telegram)](https://t.me/ваш_телеграм)
-[![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github)](https://github.com/ваш_github)
-
-## Установка
-1. Клонировать репозиторий:
+## 🚀 Быстрый старт
+1. Клонируйте репозиторий:
 ```bash
 git clone https://github.com/yourusername/pipuztrade-pro.git
