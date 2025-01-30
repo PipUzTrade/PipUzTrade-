@@ -11,9 +11,9 @@
             box-sizing: border-box;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
-
+        
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
+        
         :root {
             --gold: #FFD700;
             --space: linear-gradient(45deg, #0F0F1A 0%, #1A1A2E 50%, #2A2A40 100%);
@@ -95,6 +95,8 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 4rem 2rem;
+            transform: translateZ(0);
+            transition: transform 0.4s ease-out;
         }
 
         .services {
@@ -120,6 +122,20 @@
             overflow: hidden;
             border: 1px solid rgba(255, 215, 0, 0.1);
             transform-style: preserve-3d;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .service-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .service-card:hover .service-card-inner {
+            transform: rotateY(15deg) rotateX(10deg);
         }
 
         .service-card::before {
@@ -148,6 +164,25 @@
             left: 100%;
         }
 
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x) var(--y), 
+                rgba(255, 215, 0, 0.1) 0%, 
+                transparent 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
         .service-card h3 {
             font-size: 2rem;
             margin-bottom: 1.5rem;
@@ -159,6 +194,31 @@
             font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
+        }
+
+        .hidden-content {
+            margin-top: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .service-card:hover .hidden-content {
+            opacity: 1;
+        }
+
+        .demo-button {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .demo-button:hover {
+            background: var(--gold);
+            color: #000;
         }
 
         .social-links {
@@ -187,6 +247,25 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 215, 0, 0.2);
             color: var(--gold);
+        }
+
+        .social-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent 0deg,
+                var(--gold) 180deg,
+                transparent 360deg
+            );
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            to { transform: rotate(360deg); }
         }
 
         .social-button:hover {
@@ -225,45 +304,35 @@
             .service-card { padding: 2rem; }
             .social-button { padding: 1rem 2rem; margin: 1rem; }
         }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const particlesContainer = document.createElement('div');
-            particlesContainer.className = 'particles';
-            document.body.appendChild(particlesContainer);
 
-            for(let i = 0; i < 150; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.cssText = `
-                    width: ${Math.random() * 3 + 1}px;
-                    height: ${Math.random() * 3 + 1}px;
-                    left: ${Math.random() * 100}%;
-                    top: ${Math.random() * 100}%;
-                    animation-delay: ${Math.random() * 3}s;
-                `;
-                particlesContainer.appendChild(particle);
+        @media (max-width: 480px) {
+            .service-card {
+                transform: none !important;
+                margin: 0 -1rem;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
             }
+        }
 
-            document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth - 0.5) * 20;
-                const y = (e.clientY / window.innerHeight - 0.5) * 20;
-                
-                document.querySelectorAll('.service-card').forEach(card => {
-                    card.style.transform = `
-                        translateY(-15px)
-                        scale(1.02)
-                        rotateX(${y}deg)
-                        rotateY(${x}deg)
-                    `;
-                });
-            });
-        });
-    </script>
+        .header p {
+            opacity: 0;
+            animation: textGlow 2s 0.5s forwards;
+            position: relative;
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes textGlow {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="hero-bg"></div>
+    <div class="particles"></div>
     
     <header class="header">
         <div class="logo">PipUzTrade</div>
@@ -273,16 +342,31 @@
     <div class="container">
         <div class="services">
             <div class="service-card">
-                <h3>Форекс Платформа</h3>
-                <p>Алгоритмическая торговля с AI-ассистентом и аналитикой в реальном времени</p>
+                <div class="service-card-inner">
+                    <h3>Форекс Платформа</h3>
+                    <p>Алгоритмическая торговля с AI-ассистентом и аналитикой в реальном времени</p>
+                    <div class="hidden-content">
+                        <button class="demo-button">Live Demo</button>
+                    </div>
+                </div>
             </div>
             <div class="service-card">
-                <h3>Крипто Решения</h3>
-                <p>Стейкинг, NFT-маркетплейс и безопасный мультичейн-кошелёк</p>
+                <div class="service-card-inner">
+                    <h3>Крипто Решения</h3>
+                    <p>Стейкинг, NFT-маркетплейс и безопасный мультичейн-кошелёк</p>
+                    <div class="hidden-content">
+                        <button class="demo-button">Live Demo</button>
+                    </div>
+                </div>
             </div>
             <div class="service-card">
-                <h3>Обучение PRO</h3>
-                <p>Персональные менторы и VR-тренажёры для профессиональных трейдеров</p>
+                <div class="service-card-inner">
+                    <h3>Обучение PRO</h3>
+                    <p>Персональные менторы и VR-тренажёры для профессиональных трейдеров</p>
+                    <div class="hidden-content">
+                        <button class="demo-button">Live Demo</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -299,5 +383,58 @@
     <footer>
         <p>© 2024 PipUzTrade Pro. Все права защищены</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Генерация частиц
+            const particlesContainer = document.querySelector('.particles');
+            for(let i = 0; i < 150; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.cssText = `
+                    width: ${Math.random() * 3 + 1}px;
+                    height: ${Math.random() * 3 + 1}px;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 3}s;
+                `;
+                particlesContainer.appendChild(particle);
+            }
+
+            // Параллакс эффект при движении мыши
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                
+                document.querySelectorAll('.service-card').forEach(card => {
+                    card.style.setProperty('--x', `${e.clientX}px`);
+                    card.style.setProperty('--y', `${e.clientY}px`);
+                    card.style.transform = `
+                        translateY(-15px)
+                        scale(1.02)
+                        rotateX(${y}deg)
+                        rotateY(${x}deg)
+                    `;
+                });
+            });
+
+            // Параллакс при скролле
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                document.querySelector('.container').style.transform = 
+                    `translate3d(0, ${scrolled * 0.1}px, 0)`;
+            });
+
+            // Обработчики для кнопок демо
+            document.querySelectorAll('.demo-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.target.textContent = 'Загрузка...';
+                    setTimeout(() => {
+                        e.target.textContent = 'Демо доступно в приложении';
+                    }, 1000);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
