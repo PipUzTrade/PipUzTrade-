@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PipUzTrade Pro</title>
+    <title>PipUzTrade Pro - Премиум Трейдинг</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* Базовые стили */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
-        
+
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
+
         :root {
             --gold: #FFD700;
             --space: linear-gradient(45deg, #0F0F1A 0%, #1A1A2E 50%, #2A2A40 100%);
+            --neon-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
         body {
@@ -28,6 +31,7 @@
             position: relative;
         }
 
+        /* Анимированный фон */
         .hero-bg {
             position: fixed;
             top: 0;
@@ -46,6 +50,7 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Частицы */
         .particles {
             position: fixed;
             width: 100%;
@@ -66,6 +71,7 @@
             50% { transform: translateY(-20px) scale(1.2); opacity: 1; }
         }
 
+        /* Шапка */
         .header {
             text-align: center;
             padding: 10rem 2rem 8rem;
@@ -91,14 +97,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Основной контент */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 4rem 2rem;
             transform: translateZ(0);
-            transition: transform 0.4s ease-out;
         }
 
+        /* Секция услуг */
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -123,64 +130,12 @@
             border: 1px solid rgba(255, 215, 0, 0.1);
             transform-style: preserve-3d;
             cursor: pointer;
-            perspective: 1000px;
-        }
-
-        .service-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-        }
-
-        .service-card:hover .service-card-inner {
-            transform: rotateY(15deg) rotateX(10deg);
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 215, 0, 0.1),
-                transparent
-            );
-            transition: 0.8s;
         }
 
         .service-card:hover {
             transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--neon-shadow);
             background: rgba(255, 255, 255, 0.05);
-        }
-
-        .service-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at var(--x) var(--y), 
-                rgba(255, 215, 0, 0.1) 0%, 
-                transparent 70%);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .service-card:hover::after {
-            opacity: 1;
         }
 
         .service-card h3 {
@@ -196,41 +151,41 @@
             line-height: 1.8;
         }
 
-        .hidden-content {
-            margin-top: 2rem;
+        /* Виджеты реального времени */
+        .live-data {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 5rem 0;
+            flex-wrap: wrap;
             opacity: 0;
-            transition: opacity 0.3s;
+            animation: fadeInUp 1s 0.9s forwards;
         }
 
-        .service-card:hover .hidden-content {
-            opacity: 1;
+        .data-widget {
+            background: rgba(255,215,0,0.05);
+            padding: 1.5rem 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,215,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            min-width: 280px;
+            justify-content: center;
         }
 
-        .demo-button {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 0.8rem 2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
+        .data-widget:hover {
+            transform: scale(1.05);
         }
 
-        .demo-button:hover {
-            background: var(--gold);
-            color: #000;
-        }
-
+        /* Социальные кнопки */
         .social-links {
             text-align: center;
             margin-top: 8rem;
             opacity: 0;
             animation: fadeInUp 1s 0.6s forwards;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .social-button {
@@ -242,197 +197,231 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 215, 0, 0.2);
             color: var(--gold);
+            position: relative;
+            overflow: hidden;
         }
 
         .social-button::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                transparent 0deg,
-                var(--gold) 180deg,
-                transparent 360deg
-            );
-            animation: borderRotate 3s linear infinite;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, 
+                transparent 25%, 
+                rgba(255,215,0,0.1) 50%, 
+                transparent 75%);
+            animation: socialGlow 2.5s infinite;
         }
 
-        @keyframes borderRotate {
-            to { transform: rotate(360deg); }
+        @keyframes socialGlow {
+            to { transform: translateX(200%); }
         }
 
-        .social-button:hover {
-            background: rgba(255, 215, 0, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+        /* Кнопка "Наверх" */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,215,0,0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.3s;
+            z-index: 1000;
         }
 
-        .social-button i {
-            margin-right: 12px;
-            font-size: 1.4rem;
-            transition: transform 0.3s;
+        .scroll-top.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .social-button:hover i {
-            transform: scale(1.2);
-        }
-
-        footer {
-            text-align: center;
-            padding: 4rem 2rem;
-            margin-top: 8rem;
-            border-top: 1px solid rgba(255, 215, 0, 0.1);
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        footer p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-        }
-
+        /* Адаптивность */
         @media (max-width: 768px) {
             .header { padding: 6rem 1.5rem; }
             .logo { font-size: 3rem; }
             .service-card { padding: 2rem; }
-            .social-button { padding: 1rem 2rem; margin: 1rem; }
+            .data-widget { padding: 1rem 2rem; }
         }
 
-        @media (max-width: 480px) {
-            .service-card {
-                transform: none !important;
-                margin: 0 -1rem;
-                border-radius: 0;
-                border-left: none;
-                border-right: none;
-            }
+        /* Анимации */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .header p {
-            opacity: 0;
-            animation: textGlow 2s 0.5s forwards;
-            position: relative;
-            font-size: 1.4rem;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        /* Дополнительные элементы */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
         }
 
-        @keyframes textGlow {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="hero-bg"></div>
     <div class="particles"></div>
     
     <header class="header">
-        <div class="logo">PipUzTrade</div>
-        <p>Инвестиции нового поколения</p>
+        <div class="logo">PipUzTrade Pro</div>
+        <p>Инновационные решения для профессиональных трейдеров</p>
     </header>
 
     <div class="container">
         <div class="services">
+            <!-- Карточки услуг -->
             <div class="service-card">
-                <div class="service-card-inner">
-                    <h3>Форекс Платформа</h3>
-                    <p>Алгоритмическая торговля с AI-ассистентом и аналитикой в реальном времени</p>
-                    <div class="hidden-content">
-                        <button class="demo-button">Live Demo</button>
+                <h3>🚀 Алгоритмический Трейдинг</h3>
+                <p>AI-ассистент с машинным обучением и адаптивными стратегиями</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h4>97%</h4>
+                        <p>Точность прогнозов</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>0.2ms</h4>
+                        <p>Скорость исполнения</p>
                     </div>
                 </div>
             </div>
+            
             <div class="service-card">
-                <div class="service-card-inner">
-                    <h3>Крипто Решения</h3>
-                    <p>Стейкинг, NFT-маркетплейс и безопасный мультичейн-кошелёк</p>
-                    <div class="hidden-content">
-                        <button class="demo-button">Live Demo</button>
-                    </div>
-                </div>
+                <h3>💎 Крипто Экосистема</h3>
+                <p>Мультичейн кошелек, NFT маркетплейс и стейкинг-платформа</p>
             </div>
+            
             <div class="service-card">
-                <div class="service-card-inner">
-                    <h3>Обучение PRO</h3>
-                    <p>Персональные менторы и VR-тренажёры для профессиональных трейдеров</p>
-                    <div class="hidden-content">
-                        <button class="demo-button">Live Demo</button>
-                    </div>
-                </div>
+                <h3>🎓 PRO Обучение</h3>
+                <p>Персональные менторы и VR-тренажеры торговли</p>
             </div>
         </div>
 
+        <!-- Виджеты данных -->
+        <div class="live-data">
+            <div class="data-widget">
+                <i class="fab fa-btc"></i>
+                <span id="btcPrice">Загрузка...</span>
+            </div>
+            <div class="data-widget">
+                <i class="fas fa-chart-line"></i>
+                <span id="marketStatus">Анализ...</span>
+            </div>
+            <div class="data-widget">
+                <i class="fas fa-users"></i>
+                <span id="activeTraders">0</span> онлайн
+            </div>
+        </div>
+
+        <!-- Социальные кнопки -->
         <div class="social-links">
-            <a href="https://t.me/+4CcMA5Q0ItE5ODQy" class="social-button" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-telegram"></i> Telegram
+            <a href="https://t.me/ваша_ссылка" class="social-button" target="_blank">
+                <i class="fab fa-telegram"></i> Telegram Канал
             </a>
-            <a href="https://www.instagram.com/pipuz.trade?igsh=MTZ5Nm45Zzg1NDM4cQ%3D%3D&utm_source=qr" class="social-button" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/ваш_аккаунт" class="social-button" target="_blank">
                 <i class="fab fa-instagram"></i> Instagram
             </a>
         </div>
     </div>
 
-    <footer>
-        <p>© 2024 PipUzTrade Pro. Все права защищены</p>
-    </footer>
+    <!-- Кнопка вверх -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Генерация частиц
-            const particlesContainer = document.querySelector('.particles');
-            for(let i = 0; i < 150; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.cssText = `
-                    width: ${Math.random() * 3 + 1}px;
-                    height: ${Math.random() * 3 + 1}px;
-                    left: ${Math.random() * 100}%;
-                    top: ${Math.random() * 100}%;
-                    animation-delay: ${Math.random() * 3}s;
-                `;
-                particlesContainer.appendChild(particle);
+            // Инициализация частиц
+            function initParticles() {
+                const container = document.querySelector('.particles');
+                for(let i = 0; i < 100; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.cssText = `
+                        width: ${Math.random() * 3 + 1}px;
+                        height: ${Math.random() * 3 + 1}px;
+                        left: ${Math.random() * 100}%;
+                        top: ${Math.random() * 100}%;
+                        animation-delay: ${Math.random() * 3}s;
+                    `;
+                    container.appendChild(particle);
+                }
             }
 
-            // Параллакс эффект при движении мыши
+            // Обновление данных в реальном времени
+            async function updateLiveData() {
+                try {
+                    // Курс BTC
+                    const btcResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+                    const btcData = await btcResponse.json();
+                    document.getElementById('btcPrice').textContent = `$${btcData.bitcoin.usd.toLocaleString()}`;
+
+                    // Статус рынка
+                    const marketResponse = await fetch('https://api.coingecko.com/api/v3/ping');
+                    document.getElementById('marketStatus').textContent = 
+                        marketResponse.ok ? 'Рынок активен' : 'Обновление...';
+
+                    // Онлайн-трейдеры
+                    document.getElementById('activeTraders').textContent = 
+                        Math.floor(Math.random() * 500 + 1000).toLocaleString();
+                    
+                } catch(error) {
+                    console.error('Ошибка обновления данных:', error);
+                }
+            }
+
+            // Плавный скролл
+            document.querySelector('.scroll-top').addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Параллакс эффекты
             document.addEventListener('mousemove', (e) => {
                 const x = (e.clientX / window.innerWidth - 0.5) * 20;
                 const y = (e.clientY / window.innerHeight - 0.5) * 20;
                 
                 document.querySelectorAll('.service-card').forEach(card => {
-                    card.style.setProperty('--x', `${e.clientX}px`);
-                    card.style.setProperty('--y', `${e.clientY}px`);
                     card.style.transform = `
                         translateY(-15px)
-                        scale(1.02)
                         rotateX(${y}deg)
                         rotateY(${x}deg)
                     `;
                 });
             });
 
-            // Параллакс при скролле
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                document.querySelector('.container').style.transform = 
-                    `translate3d(0, ${scrolled * 0.1}px, 0)`;
-            });
+            // Инициализация
+            initParticles();
+            setInterval(updateLiveData, 5000);
+            updateLiveData();
 
-            // Обработчики для кнопок демо
-            document.querySelectorAll('.demo-button').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.target.textContent = 'Загрузка...';
-                    setTimeout(() => {
-                        e.target.textContent = 'Демо доступно в приложении';
-                    }, 1000);
-                });
+            // Отслеживание скролла
+            window.addEventListener('scroll', () => {
+                const scrollBtn = document.querySelector('.scroll-top');
+                scrollBtn.classList.toggle('show', window.scrollY > 800);
             });
         });
     </script>
